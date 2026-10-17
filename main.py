@@ -11,8 +11,7 @@ db = data.read_data("data.json")
 def check_user(data, userId):
 	return userId in data
 
-def check_user_question(data, userId):
-
+def check_user_question(data, userId):
 	if check_user(data, userId):
 		return data[userId]["question"] != None
 	return False
@@ -26,7 +25,7 @@ def get_text_messages(message):
 
 		if message.text == "/start":
 
-			bot.send_message(message.chat.id, "Это тестовый LeadBot - вы оформляете заявку(заказ), отправляете исполнителю. Исполнитель сразу получает данную заявку(заказ) напрямую. Исполнитель отправляет вам ответ (положительный/отрицательный/уточняющий).\n\n/add - Написать заявку(заказ).\n/answer (Для исполнителя) - Исполнитель отправляет ответ на заявку заказчику.\n/check - Проверка своей заявки.\n/registration - Зарегистрироваться исполнителем. ", reply_markup =  Base)
+			bot.send_message(message.chat.id, "This is a test LeadBot. You can create a request (order) and send it to a contractor. The contractor receives your request (order) directly and immediately. The contractor can then reply with a positive, negative, or clarifying response.\n\n/add - Create a request (order).\n/answer (For contractors) - Send a response to the customer's request.\n/check - Check the status of your request.\n/registration - Register as a contractor.", reply_markup =  Base)
 			if not check_user(db, str(message.from_user.id)):
 				db[str(message.from_user.id)] = {
 					"username": message.from_user.username,
