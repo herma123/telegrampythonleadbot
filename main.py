@@ -116,7 +116,8 @@ def get_text_messages(message):
 					except: print("question_id is None")
 					db[str(message.from_user.id)]["question_user_id"] = None
 					db[str(message.from_user.id)]["status"] = 0
-
+		
+		db[str(message.from_user.id)]["username"] = message.from_user.username
 		data.write_data("data.json", db)
 
 
