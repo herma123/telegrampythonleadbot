@@ -22,11 +22,7 @@ def check_user_question(data, userId):
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
 
-
-		if message.text == "/start":
-
-			bot.send_message(message.chat.id, "This is a test LeadBot. You can create a request (order) and send it to a contractor. The contractor receives your request (order) directly and immediately. The contractor can then reply with a positive, negative, or clarifying response.\n\n/add - Create a request (order).\n/answer (For contractors) - Send a response to the customer's request.\n/check - Check the status of your request.\n/registration - Register as a contractor.", reply_markup = Base)
-			if not check_user(db, str(message.from_user.id)):
+		if not check_user(db, str(message.from_user.id)):
 				db[str(message.from_user.id)] = {
 					"username": message.from_user.username,
 					"status": 0,
@@ -34,6 +30,10 @@ def get_text_messages(message):
 					"admin": 0
 				}
 				print(f"{message.from_user.id} new user!")
+			
+		if message.text == "/start":
+
+			bot.send_message(message.chat.id, "This is a test LeadBot. You can create a request (order) and send it to a contractor. The contractor receives your request (order) directly and immediately. The contractor can then reply with a positive, negative, or clarifying response.\n\n/add - Create a request (order).\n/answer (For contractors) - Send a response to the customer's request.\n/check - Check the status of your request.\n/registration - Register as a contractor.", reply_markup = Base)
 
 
 		if check_user(db, str(message.from_user.id)) and (message.text != "/start"):
